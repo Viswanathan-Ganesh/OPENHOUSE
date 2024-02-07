@@ -95,7 +95,7 @@ public class FirstPersonController : MonoBehaviour
     private void ApplyFinalMovements()
     {
         if (!characterController.isGrounded)
-            moveDirection.y -= gravity + Time.deltaTime;
+            moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);
 
