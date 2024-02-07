@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FirstPersonController : MonoBehaviour
 {
+
+    PhotonView view;
     public bool CanMove { get; private set; } = true;
     private bool IsSprinting => canSprint && Input.GetKey(sprintKey);
     private bool ShouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
@@ -39,6 +42,10 @@ public class FirstPersonController : MonoBehaviour
 
     private float rotationX = 0;
 
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
     void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -49,14 +56,17 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        if (CanMove)
+        if (view.IsMine)
         {
-            HandleMovementInput();
-            HandleMouseLook();
-            if (canJump)
-                HandleJump();
+            if (CanMove)
+            {
+                HandleMovementInput();
+                HandleMouseLook();
+                if (canJump)
+                    HandleJump();
 
-            ApplyFinalMovements();
+                ApplyFinalMovements();
+            }
         }
     }
 
