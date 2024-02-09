@@ -58,7 +58,8 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        if (photonView.IsMine)
+        /*
+        if (!photonView.IsMine)
         {
             if (CanMove)
             {
@@ -70,6 +71,9 @@ public class FirstPersonController : MonoBehaviour
                 ApplyFinalMovements();
             }
         }
+        */
+
+        Debug.Log(photonView.IsMine);
     }
 
     private void HandleMovementInput()
