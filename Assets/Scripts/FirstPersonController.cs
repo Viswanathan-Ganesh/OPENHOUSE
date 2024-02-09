@@ -40,11 +40,13 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 moveDirection;
     private Vector2 currentInput;
 
+    public PhotonView photonView;
+
     private float rotationX = 0;
 
     private void Start()
     {
-        view = GetComponent<PhotonView>();
+        //view = GetComponent<PhotonView>();
     }
     void Awake()
     {
@@ -56,7 +58,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        if (view.IsMine)
+        if (photonView.IsMine)
         {
             if (CanMove)
             {

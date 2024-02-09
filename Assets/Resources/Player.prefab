@@ -180,6 +180,7 @@ MonoBehaviour:
   lowerLookLimit: 30
   jumpForce: 8
   gravity: 30
+  photonView: {fileID: 2443790259396701418}
 --- !u!33 &6610128281710319443
 MeshFilter:
   m_ObjectHideFlags: 0
