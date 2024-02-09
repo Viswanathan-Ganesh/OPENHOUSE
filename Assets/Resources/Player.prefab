@@ -180,6 +180,7 @@ MonoBehaviour:
   lowerLookLimit: 30
   jumpForce: 8
   gravity: 30
+  playerCamera: {fileID: 4451357027181148377}
   photonView: {fileID: 2443790259396701418}
 --- !u!33 &6610128281710319443
 MeshFilter:

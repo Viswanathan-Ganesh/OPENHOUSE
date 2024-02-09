@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float jumpForce = 8.0f;
     [SerializeField] private float gravity = 30.0f;
 
-    private Camera playerCamera;
+    [SerializeField] private Camera playerCamera;
     private CharacterController characterController;
 
     private Vector3 moveDirection;
@@ -73,7 +74,7 @@ public class FirstPersonController : MonoBehaviour
         }
         */
 
-        Debug.Log(photonView.IsMine);
+        Debug.Log(photonView.ViewID);   
     }
 
     private void HandleMovementInput()
