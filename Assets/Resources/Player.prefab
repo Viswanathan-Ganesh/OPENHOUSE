@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd08475b23aa548b7b9d28397d430b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7
-  height: 3
+  distance: 0
+  height: 1.5
   centerOffset: {x: 0, y: 0, z: 0}
   followOnStart: 0
-  smoothSpeed: 0.125
+  smoothSpeed: 0

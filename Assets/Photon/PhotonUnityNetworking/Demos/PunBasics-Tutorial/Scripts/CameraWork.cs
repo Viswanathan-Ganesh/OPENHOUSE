@@ -123,7 +123,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
 
-			cameraTransform.LookAt(this.transform.position + centerOffset);
+			//cameraTransform.LookAt(this.transform.position + centerOffset);
 		}
 		#endregion
 	}
