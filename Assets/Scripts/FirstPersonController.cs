@@ -49,7 +49,7 @@ public class FirstPersonController : MonoBehaviour
     
     void Awake()
     {
-        playerCamera = GetComponentInChildren<Camera>();
+        playerCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -81,7 +81,7 @@ public class FirstPersonController : MonoBehaviour
             if (CanMove)
             {
                 HandleMovementInput();
-                HandleMouseLook();
+                //HandleMouseLook();
                 if (canJump)
                     HandleJump();
 
