@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.Demo.PunBasics;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -45,10 +46,7 @@ public class FirstPersonController : MonoBehaviour
 
     private float rotationX = 0;
 
-    private void Start()
-    {
-        //view = GetComponent<PhotonView>();
-    }
+    
     void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -56,11 +54,29 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    private void Start()
+    {
+        //view = GetComponent<PhotonView>();
+        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+        if (_cameraWork != null)
+        {
+            if(photonView.IsMine)
+            {
+                _cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.LogError("CameraWork is missing!");
+        }
+
+    }
 
     void Update()
     {
-        /*
-        if (!photonView.IsMine)
+        
+        if (photonView.IsMine && PhotonNetwork.IsConnected)
         {
             if (CanMove)
             {
@@ -72,9 +88,7 @@ public class FirstPersonController : MonoBehaviour
                 ApplyFinalMovements();
             }
         }
-        */
-
-        Debug.Log(photonView.ViewID);   
+           
     }
 
     private void HandleMovementInput()
