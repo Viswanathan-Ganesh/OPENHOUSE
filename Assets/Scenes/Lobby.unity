@@ -1043,6 +1043,13 @@ MonoBehaviour:
   createInput: {fileID: 1215773337}
   joinInput: {fileID: 2056297828}
   maxPlayer: 4
+  thiefPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
+  copPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
+  minX: -18
+  maxX: 18
+  minZ: -25
+  maxZ: 25
+  yPos: 3
 --- !u!1 &1189223281
 GameObject:
   m_ObjectHideFlags: 0
