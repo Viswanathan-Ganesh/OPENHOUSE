@@ -26,11 +26,11 @@ public class SpawnPlayers : MonoBehaviour
         thief.Add("Team", "Thief");
 
 
-        Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ));
+        
         //PhotonNetwork.Instantiate(thisfPrefab.name, randomPos, Quaternion.identity);
         //PhotonNetwork.PlayerList[0].UserId
 
-        ///PhotonNetwork.LocalPlayer.UserId == ;
+        //PhotonNetwork.LocalPlayer.UserId == ;
 
         /*
         foreach(Player player in PhotonNetwork.PlayerList)

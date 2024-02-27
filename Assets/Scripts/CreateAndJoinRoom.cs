@@ -5,6 +5,7 @@ using Photon.Realtime;
 using TMPro;
 using ExitGames.Client.Photon;
 using Photon.Pun.Demo.Cockpit;
+using ExitGames.Client.Photon.StructWrapping;
 
 public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,14 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public TMP_InputField joinInput;
     [SerializeField] private int maxPlayer;
     private bool dummy = true;
+    public GameObject thiefPrefab;
+    public GameObject copPrefab;
+
+    public float minX;
+    public float maxX;
+    public float minZ;
+    public float maxZ;
+    public float yPos;
 
     public void CreateRoom()
     {
@@ -28,19 +37,41 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 
     public void Update()
     {
-        if(PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer)
+        if (PhotonNetwork.InRoom) // Checks if the player is in room
         {
-            //
+            if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy) // if current room's player count == maxplayer and dummy var is true
+            {
+                Hashtable customPropCop = new Hashtable();
+                Hashtable customPropThief = new Hashtable();
+
+                customPropCop.Add("Team", "Cop");
+                customPropThief.Add("Team", "Thief");
+                
+                CopSelector(); // to assign different roles randomly
+
+                for (int i = 0; i < maxPlayer; i++)
+                {
+                    Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ)); // random position
+                    
+                    if (PhotonNetwork.PlayerList[i].CustomProperties == customPropCop) // if the player has cop assigned
+                    {
+                        if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId) // if the local player instance has the same userid as the instance having assigned cop
+                        {
+                            PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
+                        }       
+                    }
+                    else if(PhotonNetwork.PlayerList[i].CustomProperties == customPropThief) // works the same as above
+                    {
+                        if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId)
+                        {
+                            PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+                        }
+                    }
+                }
+                dummy = false;
+            }
         }
-        /*
-        if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy)
-        {
-            //PhotonNetwork.SetMasterClient(PhotonNetwork.PlayerList[maxPlayer]);
-            CopSelector();
-            PhotonNetwork.LoadLevel("Level0");
-            dummy = false;
-        }
-        */
+        
     }
     
     public override void OnJoinedRoom()
