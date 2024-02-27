@@ -30,7 +30,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     {
         if(PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer)
         {
-
+            //
         }
         /*
         if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy)
