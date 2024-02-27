@@ -1042,6 +1042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createInput: {fileID: 1215773337}
   joinInput: {fileID: 2056297828}
+  maxPlayer: 4
 --- !u!1 &1189223281
 GameObject:
   m_ObjectHideFlags: 0
