@@ -28,6 +28,11 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 
     public void Update()
     {
+        if(PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer)
+        {
+
+        }
+        /*
         if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy)
         {
             //PhotonNetwork.SetMasterClient(PhotonNetwork.PlayerList[maxPlayer]);
@@ -35,12 +40,14 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel("Level0");
             dummy = false;
         }
+        */
     }
     
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("LobbyLevel");
-        PhotonNetwork.AutomaticallySyncScene = true;
+        //PhotonNetwork.LoadLevel("LobbyLevel");
+        PhotonNetwork.LoadLevel("Level0");
+        //PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void CopSelector()

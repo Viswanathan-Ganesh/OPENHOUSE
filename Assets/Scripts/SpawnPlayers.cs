@@ -5,8 +5,10 @@ using ExitGames.Client.Photon;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    public GameObject theifPrefab;
+    public GameObject thiefPrefab;
     public GameObject copPrefab;
+    [SerializeField] private int[] randomList;
+    public int maxPlayerCount = 4;
 
     public float minX;
     public float maxX;
@@ -23,18 +25,35 @@ public class SpawnPlayers : MonoBehaviour
         cop.Add("Team", "Cop");
         thief.Add("Team", "Thief");
 
+
         Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ));
+        //PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+
+        /*
         foreach(Player player in PhotonNetwork.PlayerList)
         {
             if(player.CustomProperties == thief)
             {
-                PhotonNetwork.Instantiate(theifPrefab.name, randomPos, Quaternion.identity);
+                PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
             }
             else if (player.CustomProperties == cop)
             {
                 PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity);
             }
             
+        }
+        */
+    }
+
+    public void Assigner()
+    {
+        int rand = Random.Range(0, maxPlayerCount);
+
+        for (int i = 0; i < maxPlayerCount; i++) 
+        {
+            if (i != rand)
+                randomList[i] = 0;
+            else randomList[rand] = 1;
         }
     }
 }
