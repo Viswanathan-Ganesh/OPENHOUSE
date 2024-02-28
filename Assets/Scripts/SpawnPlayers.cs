@@ -10,6 +10,15 @@ public class SpawnPlayers : MonoBehaviour
     [SerializeField] private int maxPlayer;
     private bool dummy = true;
 
+    public Hashtable customPropCop = new Hashtable();
+    public Hashtable customPropThief = new Hashtable();
+
+    void Awake(){
+        customPropCop.Add("Team", "Cop");
+        customPropThief.Add("Team", "Thief");
+    }
+    
+                
     public float minX;
     public float maxX;
     public float minZ;
@@ -26,18 +35,13 @@ public class SpawnPlayers : MonoBehaviour
             if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy) // if current room's player count == maxplayer and dummy var is true
             {
                 Debug.LogError("MaxPlayers reached");
-                Hashtable customPropCop = new Hashtable();
-                Hashtable customPropThief = new Hashtable();
-
-                customPropCop.Add("Team", "Cop");
-                customPropThief.Add("Team", "Thief");
-
+                
                 CopSelector(); // to assign different roles randomly
                 foreach(Player player in PhotonNetwork.PlayerList)
                 {
                     Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ)); // random position
-
-                    if (player.CustomProperties == customPropCop) // if the player has cop assigned
+                    
+                    if (player.CustomProperties.ContainsKey("Team") && (string)player.CustomProperties["Team"] == "Cop") // if the player has cop assigned
                     {
                         Debug.LogError("Cop Matched");
                         if (PhotonNetwork.LocalPlayer.UserId == player.UserId) // if the local player instance has the same userid as the instance having assigned cop
@@ -45,8 +49,9 @@ public class SpawnPlayers : MonoBehaviour
                             PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
                             Debug.LogError("Cop Spawned");
                         }
+                        dummy = false;
                     }
-                    else if (player.CustomProperties == customPropThief) // works the same as above
+                    else if (player.CustomProperties.ContainsKey("Team") && (string)player.CustomProperties["Team"] == "Thief") // works the same as above
                     {
                         Debug.LogError("Thief Matched");
                         if (PhotonNetwork.LocalPlayer.UserId == player.UserId)
@@ -54,6 +59,7 @@ public class SpawnPlayers : MonoBehaviour
                             PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
                             Debug.LogError("Thief Spawned");
                         }
+                        dummy = false;
                     }
                 }
                 /*
@@ -82,7 +88,7 @@ public class SpawnPlayers : MonoBehaviour
                     }
                 
                  }*/
-                dummy = false;
+                //dummy = false;
             }
         }
 
@@ -93,11 +99,6 @@ public class SpawnPlayers : MonoBehaviour
     {
         Debug.LogError("CopSelector");
         int rand = Random.Range(0, maxPlayer);
-        Hashtable customPropCop = new Hashtable();
-        Hashtable customPropThief = new Hashtable();
-
-        customPropCop.Add("Team", "Cop");
-        customPropThief.Add("Team", "Thief");
 
         if (PhotonNetwork.InRoom) // Check if connected to a room
         {
