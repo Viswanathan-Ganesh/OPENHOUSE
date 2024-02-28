@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &831481972
 Transform:
   m_ObjectHideFlags: 0
@@ -263,8 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thiefPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
   copPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
-  randomList: 
-  maxPlayerCount: 4
+  maxPlayer: 4
   minX: -18
   maxX: 18
   minZ: -25

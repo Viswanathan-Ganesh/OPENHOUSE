@@ -7,8 +7,8 @@ public class SpawnPlayers : MonoBehaviour
 {
     public GameObject thiefPrefab;
     public GameObject copPrefab;
-    [SerializeField] private int[] randomList;
-    public int maxPlayerCount = 4;
+    [SerializeField] private int maxPlayer;
+    private bool dummy = true;
 
     public float minX;
     public float maxX;
@@ -16,47 +16,109 @@ public class SpawnPlayers : MonoBehaviour
     public float maxZ;
     public float yPos;
 
-
-    private void Start()
+    
+    public void Update()
     {
-        Hashtable cop = new Hashtable();
-        Hashtable thief = new Hashtable();
-
-        cop.Add("Team", "Cop");
-        thief.Add("Team", "Thief");
-
-
-        
-        //PhotonNetwork.Instantiate(thisfPrefab.name, randomPos, Quaternion.identity);
-        //PhotonNetwork.PlayerList[0].UserId
-
-        //PhotonNetwork.LocalPlayer.UserId == ;
-
-        /*
-        foreach(Player player in PhotonNetwork.PlayerList)
+        Debug.Log("Updating");
+        if (PhotonNetwork.InRoom) // Checks if the player is in room
         {
-            if(player.CustomProperties == thief)
+            Debug.LogError("InRoom");
+            if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy) // if current room's player count == maxplayer and dummy var is true
             {
-                PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+                Debug.LogError("MaxPlayers reached");
+                Hashtable customPropCop = new Hashtable();
+                Hashtable customPropThief = new Hashtable();
+
+                customPropCop.Add("Team", "Cop");
+                customPropThief.Add("Team", "Thief");
+
+                CopSelector(); // to assign different roles randomly
+                foreach(Player player in PhotonNetwork.PlayerList)
+                {
+                    Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ)); // random position
+
+                    if (player.CustomProperties == customPropCop) // if the player has cop assigned
+                    {
+                        Debug.LogError("Cop Matched");
+                        if (PhotonNetwork.LocalPlayer.UserId == player.UserId) // if the local player instance has the same userid as the instance having assigned cop
+                        {
+                            PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
+                            Debug.LogError("Cop Spawned");
+                        }
+                    }
+                    else if (player.CustomProperties == customPropThief) // works the same as above
+                    {
+                        Debug.LogError("Thief Matched");
+                        if (PhotonNetwork.LocalPlayer.UserId == player.UserId)
+                        {
+                            PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+                            Debug.LogError("Thief Spawned");
+                        }
+                    }
+                }
+                /*
+                for (int i = 0; i < maxPlayer; i++)
+                {
+                    Debug.LogError(i);
+                    Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ)); // random position
+                    
+                    if (PhotonNetwork.PlayerList[i].CustomProperties == customPropCop) // if the player has cop assigned
+                    {
+                        Debug.LogError("Cop Matched");
+                        if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId) // if the local player instance has the same userid as the instance having assigned cop
+                        {
+                            PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
+                            Debug.LogError("Cop Spawned");
+                        }
+                    }
+                    else if (PhotonNetwork.PlayerList[i].CustomProperties == customPropThief) // works the same as above
+                    {
+                        Debug.LogError("Thief Matched");
+                        if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId)
+                        {
+                            PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+                            Debug.LogError("Thief Spawned");
+                        }
+                    }
+                
+                 }*/
+                dummy = false;
             }
-            else if (player.CustomProperties == cop)
-            {
-                PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity);
-            }
-            
         }
-        */
+
     }
-
-    public void Assigner()
+    
+    
+    public void CopSelector()
     {
-        int rand = Random.Range(0, maxPlayerCount);
+        Debug.LogError("CopSelector");
+        int rand = Random.Range(0, maxPlayer);
+        Hashtable customPropCop = new Hashtable();
+        Hashtable customPropThief = new Hashtable();
 
-        for (int i = 0; i < maxPlayerCount; i++) 
+        customPropCop.Add("Team", "Cop");
+        customPropThief.Add("Team", "Thief");
+
+        if (PhotonNetwork.InRoom) // Check if connected to a room
         {
-            if (i != rand)
-                randomList[i] = 0;
-            else randomList[rand] = 1;
+            int i = 0;
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                Debug.LogError(player); 
+                if (i == rand)
+                {
+                    Debug.LogError(customPropCop);
+                    player.SetCustomProperties(customPropCop);
+                }
+                else
+                {
+                    Debug.LogError(customPropThief);
+                    player.SetCustomProperties(customPropThief);
+                }
+                i++;
+                Debug.LogError(player.CustomProperties);
+            }
         }
+
     }
 }

@@ -34,13 +34,16 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(joinInput.text);
     }
     
-
+    /*
     public void Update()
     {
+        Debug.Log("Updating");
         if (PhotonNetwork.InRoom) // Checks if the player is in room
         {
+            Debug.Log("InRoom");
             if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayer && dummy) // if current room's player count == maxplayer and dummy var is true
             {
+                Debug.Log("MaxPlayers reached");
                 Hashtable customPropCop = new Hashtable();
                 Hashtable customPropThief = new Hashtable();
 
@@ -58,6 +61,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
                         if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId) // if the local player instance has the same userid as the instance having assigned cop
                         {
                             PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
+                            Debug.Log("Cop Spawned");
                         }       
                     }
                     else if(PhotonNetwork.PlayerList[i].CustomProperties == customPropThief) // works the same as above
@@ -65,6 +69,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
                         if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.PlayerList[i].UserId)
                         {
                             PhotonNetwork.Instantiate(thiefPrefab.name, randomPos, Quaternion.identity);
+                            Debug.Log("Thief Spawned");
                         }
                     }
                 }
@@ -73,14 +78,15 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         }
         
     }
-    
+    */
+
     public override void OnJoinedRoom()
     {
         //PhotonNetwork.LoadLevel("LobbyLevel");
         PhotonNetwork.LoadLevel("Level0");
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
-
+    /*
     public void CopSelector()
     {
         int rand = Random.Range(0, maxPlayer);
@@ -108,4 +114,5 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         }
 
     }
+    */
 }
