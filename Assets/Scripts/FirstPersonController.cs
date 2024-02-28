@@ -81,7 +81,7 @@ public class FirstPersonController : MonoBehaviour
             if (CanMove)
             {
                 HandleMovementInput();
-                //HandleMouseLook();
+                HandleMouseLook();
                 if (canJump)
                     HandleJump();
 

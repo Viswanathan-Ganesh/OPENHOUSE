@@ -227,7 +227,6 @@ GameObject:
   m_Component:
   - component: {fileID: 831481972}
   - component: {fileID: 831481973}
-  - component: {fileID: 831481974}
   m_Layer: 0
   m_Name: SpawnPlayers
   m_TagString: Untagged
@@ -263,30 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thiefPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
-  copPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
-  maxPlayer: 4
-  minX: -18
-  maxX: 18
-  minZ: -25
-  maxZ: 25
-  yPos: 3
---- !u!114 &831481974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831481971}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2066f6b7143f2574c91657ae747558a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thiefPrefab: {fileID: 2563752800881457910, guid: 732aa778f3641354fbc7f3b50dfbdbc8, type: 3}
-  copPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
-  playerprefabs: []
-  maxPlayer: 4
-  copplayerno: 0
+  copPrefab: {fileID: 2563752800881457910, guid: 732aa778f3641354fbc7f3b50dfbdbc8, type: 3}
+  maxPlayer: 1
   minX: -18
   maxX: 18
   minZ: -25
