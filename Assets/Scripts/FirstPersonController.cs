@@ -53,6 +53,24 @@ public class FirstPersonController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Get the main camera in the scene
+        Camera mainCamera = Camera.main;
+
+        // Make sure a main camera exists
+        if (mainCamera != null)
+        {
+            // Set the main camera as a child of the player GameObject
+            mainCamera.transform.SetParent(transform);
+
+            // Set the local position and rotation of the main camera relative to the player
+            mainCamera.transform.localPosition = Vector3.zero; // You may adjust this as needed
+            mainCamera.transform.localRotation = Quaternion.identity; // You may adjust this as needed
+        }
+        else
+        {
+            Debug.LogError("Main camera not found in the scene!");
+        }
     }
     private void Start()
     {
