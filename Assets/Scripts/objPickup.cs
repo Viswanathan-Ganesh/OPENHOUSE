@@ -4,18 +4,18 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.Demo.PunBasics;
+using Autodesk.Fbx;
 
 public class objPickup : MonoBehaviour
 {
     public GameObject crosshair1, crosshair2;
-    public Transform objTransform, cameraTrans;
     public bool interactable, pickedup;
-    public Rigidbody objRigidbody;
+    //public Rigidbody objRigidbody;
     public float throwAmount;
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("MainCamera"))
+        if (other.CompareTag("Player"))
         {
             crosshair1.SetActive(false);
             crosshair2.SetActive(true);
@@ -24,7 +24,7 @@ public class objPickup : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("MainCamera"))
+        if (other.CompareTag("Player"))
         {
             if (pickedup == false)
             {
@@ -34,8 +34,8 @@ public class objPickup : MonoBehaviour
             }
             if (pickedup == true)
             {
-                objTransform.parent = null;
-                objRigidbody.useGravity = true;
+                transform.parent = null;
+                //objRigidbody.useGravity = true;
                 crosshair1.SetActive(true);
                 crosshair2.SetActive(false);
                 interactable = false;
@@ -43,35 +43,97 @@ public class objPickup : MonoBehaviour
             }
         }
     }
-  
+
     void Update()
     {
         if (interactable == true)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKey(KeyCode.E))
             {
-                objTransform.parent = cameraTrans;
-                objRigidbody.useGravity = false;
+                //transform.parent = Camera.main.transform;
+                transform.SetParent(Camera.main.transform);
+                //objRigidbody.useGravity = false;
 
                 pickedup = true;
             }
+            /*
             if (Input.GetMouseButtonUp(0))
             {
-                objTransform.parent = null;
-                objRigidbody.useGravity = true;
+                transform.SetParent(null);
+                transform.position += new Vector3(0f, -9.81f, 0f);
+                //useGravity = true;
                 pickedup = false;
             }
-            if (pickedup == true)
-            {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    objTransform.parent = null;
-                    objRigidbody.useGravity = true;
-                    //objRigidbody.velocity = cameraTrans.forward * throwAmount * Time.deltaTime;
-                    objRigidbody.AddForce(cameraTrans.forward * throwAmount * Time.deltaTime);
-                    pickedup = false;
-                }
-            }
+            */
         }
     }
-}
+            /*
+            public GameObject crosshair1, crosshair2;
+            public Transform objTransform;
+            public bool interactable, pickedup;
+            //public Rigidbody objRigidbody;
+            public float throwAmount;
+
+            void OnTriggerStay(Collider other)
+            {
+                if (other.CompareTag("MainCamera"))
+                {
+                    crosshair1.SetActive(false);
+                    crosshair2.SetActive(true);
+                    interactable = true;
+                }
+            }
+            void OnTriggerExit(Collider other)
+            {
+                if (other.CompareTag("MainCamera"))
+                {
+                    if (pickedup == false)
+                    {
+                        crosshair1.SetActive(true);
+                        crosshair2.SetActive(false);
+                        interactable = false;
+                    }
+                    if (pickedup == true)
+                    {
+                        objTransform.parent = null;
+                        //objRigidbody.useGravity = true;
+                        crosshair1.SetActive(true);
+                        crosshair2.SetActive(false);
+                        interactable = false;
+                        pickedup = false;
+                    }
+                }
+            }
+
+            void Update()
+            {
+                if (interactable == true)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        objTransform.parent = Camera.main.transform;
+                        //objRigidbody.useGravity = false;
+
+                        pickedup = true;
+                    }
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        objTransform.parent = null;
+                        //objRigidbody.useGravity = true;
+                        pickedup = false;
+                    }
+                    if (pickedup == true)
+                    {
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            objTransform.parent = null;
+                            //objRigidbody.useGravity = true;
+                            //objRigidbody.velocity = cameraTrans.forward * throwAmount * Time.deltaTime;
+                           // objRigidbody.AddForce(cameraTrans.forward * throwAmount * Time.deltaTime);
+                            pickedup = false;
+                        }
+                    }
+                }
+            }
+            */
+        }

@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &36886494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshair1: {fileID: 0}
   crosshair2: {fileID: 0}
+  objTransform: {fileID: 961209569}
   interactable: 0
   pickedup: 0
   throwAmount: 15000
@@ -1057,6 +1058,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd4c0ebb66a65945b07c48d3766d206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair1: {fileID: 0}
+  crosshair2: {fileID: 0}
+  objTransform: {fileID: 0}
+  interactable: 0
+  pickedup: 0
+  throwAmount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
