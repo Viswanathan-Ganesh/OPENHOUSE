@@ -49,7 +49,10 @@ namespace Photon.Pun.Demo.PunBasics
 		Vector3 cameraOffset = Vector3.zero;
 		
 		public Vector3 offset;
-		
+		public GameObject focus;
+		public float lookSpeedX;
+		public float lookSpeedY;
+
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -114,7 +117,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 		    //cameraTransform.LookAt(this.transform.position + centerOffset);
 			cameraTransform.position = this.GetComponentInParent<Transform>().position + offset;
-		   cameraTransform.rotation = new Quaternion(cameraTransform.rotation.x, this.GetComponentInParent<Transform>().rotation.y, cameraTransform.rotation.z, cameraTransform.rotation.w);
+		   //cameraTransform.rotation = new Quaternion(cameraTransform.rotation.x, this.GetComponentInParent<Transform>().rotation.y, cameraTransform.rotation.z, cameraTransform.rotation.w);
 	    }
 
 	   
@@ -124,8 +127,9 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.y = height;
 
 			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
-
-			cameraTransform.LookAt(this.transform.position + centerOffset);
+			//cameraTransform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * lookSpeedX);
+			//cameraTransform.Rotate(transform.right, -Input.GetAxis("Mouse Y") * lookSpeedY);
+			//cameraTransform.LookAt(this.transform.position + centerOffset);
 		}
 		#endregion
 	}

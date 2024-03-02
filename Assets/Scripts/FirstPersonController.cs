@@ -36,7 +36,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float jumpForce = 8.0f;
     [SerializeField] private float gravity = 30.0f;
 
-    [SerializeField] private Camera playerCamera;
+    private Camera playerCamera;
     private CharacterController characterController;
 
     private Vector3 moveDirection;
@@ -46,10 +46,11 @@ public class FirstPersonController : MonoBehaviour
 
     private float rotationX = 0;
 
-    
+    private float rotX;
+    private float rotY;
     void Awake()
     {
-        playerCamera = Camera.main;
+        playerCamera = Camera.main;;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -118,10 +119,15 @@ public class FirstPersonController : MonoBehaviour
     }
     private void HandleMouseLook()
     {
-        rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
-        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
+
+        //Camera.main.transform.Rotate(Vector3.right, -Input.GetAxis("Mouse Y") * 10f);
+        //Camera.main.transform.Rotate(Camera.main.transform.InverseTransformDirection(Vector3.up), Input.GetAxis("Mouse X") * 10f);
+
+        /*        Camera.main.transform.forward = transform.forward;*/
+        transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * lookSpeedX);
+        rotX += -Input.GetAxis("Mouse Y") * lookSpeedY;
+        rotY += Input.GetAxis("Mouse X") * lookSpeedX;
+        Camera.main.transform.rotation = Quaternion.Euler(rotX, rotY, 0f);
     }
 
     private void HandleJump()
