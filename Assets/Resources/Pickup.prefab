@@ -287,6 +287,7 @@ MonoBehaviour:
   interactable: 0
   pickedup: 0
   throwAmount: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!135 &4906554615896562882
 SphereCollider:
   m_ObjectHideFlags: 0

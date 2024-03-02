@@ -48,6 +48,8 @@ public class FirstPersonController : MonoBehaviour
 
     private float rotX;
     private float rotY;
+
+    public GameObject dummy;
     void Awake()
     {
         playerCamera = Camera.main;;

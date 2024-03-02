@@ -12,11 +12,14 @@ public class objPickup : MonoBehaviour
     public bool interactable, pickedup;
     //public Rigidbody objRigidbody;
     public float throwAmount;
+    private GameObject playerDummy;
+    public Vector3 offset;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            playerDummy = other.GetComponent<FirstPersonController>().dummy;
             crosshair1.SetActive(false);
             crosshair2.SetActive(true);
             interactable = true;
@@ -51,10 +54,14 @@ public class objPickup : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 //transform.parent = Camera.main.transform;
-                transform.SetParent(Camera.main.transform);
+                //transform.SetParent(Camera.main.transform);
                 //objRigidbody.useGravity = false;
-
                 pickedup = true;
+            }
+            if (pickedup)
+            {
+                Debug.Log("Afsas");
+                transform.position = playerDummy.transform.position + offset;
             }
             /*
             if (Input.GetMouseButtonUp(0))
