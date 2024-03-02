@@ -49,6 +49,9 @@ public class FirstPersonController : MonoBehaviour
     private float rotX;
     private float rotY;
 
+    public float minX;
+    public float maxX;
+
     public GameObject dummy;
     void Awake()
     {
@@ -129,6 +132,8 @@ public class FirstPersonController : MonoBehaviour
         transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * lookSpeedX);
         rotX += -Input.GetAxis("Mouse Y") * lookSpeedY;
         rotY += Input.GetAxis("Mouse X") * lookSpeedX;
+
+        rotX = Mathf.Clamp(rotX, minX, maxX);
         Camera.main.transform.rotation = Quaternion.Euler(rotX, rotY, 0f);
     }
 
