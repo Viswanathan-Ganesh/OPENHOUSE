@@ -554,7 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thiefPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
   copPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
-  maxPlayer: 1
+  maxPlayer: 2
   minX: -18
   maxX: 18
   minZ: -25
@@ -781,6 +781,7 @@ MonoBehaviour:
   pickedup: 0
   throwAmount: 15000
   offset: {x: 0, y: 0, z: 0}
+  afterRad: 0
 --- !u!135 &961209566
 SphereCollider:
   m_ObjectHideFlags: 0

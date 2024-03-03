@@ -36,10 +36,16 @@ public class SpawnPlayers : MonoBehaviour
             {
                 Debug.LogError("MaxPlayers reached");
                 
-                CopSelector(); // to assign different roles randomly
+                //  CopSelector(); // to assign different roles randomly
                 foreach(Player player in PhotonNetwork.PlayerList)
                 {
                     Vector3 randomPos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ)); // random position
+                    if (PhotonNetwork.LocalPlayer.UserId == player.UserId) // if the local player instance has the same userid as the instance having assigned cop
+                    {
+                        PhotonNetwork.Instantiate(copPrefab.name, randomPos, Quaternion.identity); // then it instatantiates cop in that specific scene only
+                        Debug.LogError("Player Spawned");
+                    }
+                    /*
                     
                     if (player.CustomProperties.ContainsKey("Team") && (string)player.CustomProperties["Team"] == "Cop") // if the player has cop assigned
                     {
@@ -61,6 +67,7 @@ public class SpawnPlayers : MonoBehaviour
                         }
                         dummy = false;
                     }
+                    */
                 }
                 /*
                 for (int i = 0; i < maxPlayer; i++)
@@ -88,7 +95,7 @@ public class SpawnPlayers : MonoBehaviour
                     }
                 
                  }*/
-                //dummy = false;
+                dummy = false;
             }
         }
 
