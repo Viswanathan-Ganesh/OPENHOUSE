@@ -14,12 +14,14 @@ public class objPickup : MonoBehaviour
     public float throwAmount;
     private GameObject playerDummy;
     public Vector3 offset;
+    private PhotonView photonView;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerDummy = other.GetComponent<FirstPersonController>().dummy;
+            photonView = other.GetComponent<PhotonView>();
             crosshair1.SetActive(false);
             crosshair2.SetActive(true);
             interactable = true;
@@ -49,7 +51,7 @@ public class objPickup : MonoBehaviour
 
     void Update()
     {
-        if (interactable == true)
+        if (interactable == true && photonView.IsMine)
         {
             if (Input.GetKey(KeyCode.E))
             {
