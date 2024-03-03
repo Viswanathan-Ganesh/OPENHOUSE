@@ -554,7 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thiefPrefab: {fileID: 6411820001959925914, guid: 5fdbbdd5d8acd39429aaae8976765250, type: 3}
   copPrefab: {fileID: 2563752800881457910, guid: 732aa778f3641354fbc7f3b50dfbdbc8, type: 3}
-  maxPlayer: 1
+  maxPlayer: 2
   minX: -18
   maxX: 18
   minZ: -25

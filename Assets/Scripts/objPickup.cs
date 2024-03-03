@@ -33,7 +33,7 @@ public class objPickup : MonoBehaviour
             {
                 crosshair1.SetActive(true);
                 crosshair2.SetActive(false);
-                interactable = false;
+                //interactable = false;
             }
             if (pickedup == true)
             {
@@ -41,7 +41,7 @@ public class objPickup : MonoBehaviour
                 //objRigidbody.useGravity = true;
                 crosshair1.SetActive(true);
                 crosshair2.SetActive(false);
-                interactable = false;
+                //interactable = false;
                 pickedup = false;
             }
         }
