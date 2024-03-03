@@ -153,7 +153,7 @@ public class objPickup : MonoBehaviour
                 //useGravity = true;
                 pickedup = false;
             }
-            */
+            
         }
     }
             /*
@@ -224,5 +224,6 @@ public class objPickup : MonoBehaviour
                     }
                 }
             }
-            */
+            
         }
+*/
